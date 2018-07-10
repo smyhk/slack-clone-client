@@ -12,7 +12,8 @@
       2,
       { "anonymous": "always", "named": "never" }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-console": ["warn", { "allow": ["info", "error"] }]
   },
   "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "plugins": ["prettier"],

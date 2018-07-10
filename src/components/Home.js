@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
 const allUsersQuery = gql`
@@ -13,19 +13,13 @@ const allUsersQuery = gql`
 
 class Home extends Component {
   render() {
-    const { data: { loading, allUsers } } = this.props;
+    const {
+      data: { loading, allUsers }
+    } = this.props;
     if (loading) {
       return null;
     }
-    return (
-      <div>
-        {
-          allUsers.map(u => (
-            <h1 key={u.id}>{u.username}</h1>
-          ))
-        }
-      </div>
-    );
+    return <div>{allUsers.map(u => <h1 key={u.id}>{u.username}</h1>)}</div>;
   }
 }
 

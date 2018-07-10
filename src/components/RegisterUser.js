@@ -1,26 +1,26 @@
-import React, { Component } from "react";
-import { Message, Button, Input, Container, Header } from "semantic-ui-react";
-import gql from "graphql-tag";
-import { graphql } from "react-apollo";
+import React, { Component } from 'react';
+import { Message, Button, Input, Container, Header } from 'semantic-ui-react';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
 class RegisterUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      usernameError: "",
-      email: "",
-      emailError: "",
-      password: "",
-      passwordError: ""
+      username: '',
+      usernameError: '',
+      email: '',
+      emailError: '',
+      password: '',
+      passwordError: ''
     };
   }
 
   onSubmit = async () => {
     this.setState({
-      usernameError: "",
-      emailError: "",
-      passwordError: ""
+      usernameError: '',
+      emailError: '',
+      passwordError: ''
     });
 
     const { username, email, password } = this.state;
@@ -30,7 +30,7 @@ class RegisterUser extends Component {
 
     const { ok, errors } = response.data.registerUser;
     if (ok) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     } else {
       const err = {};
       errors.forEach(({ path, message }) => {
