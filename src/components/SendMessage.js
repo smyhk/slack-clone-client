@@ -8,8 +8,10 @@ const SendMessageWrapper = styled.div`
   margin: 20px;
 `;
 
-export default ({ channelName }) => (
+const SendMessage = ({ channelName }) => (
   <SendMessageWrapper>
     <Input fluid placeholder={`Message # ${channelName}`} />
   </SendMessageWrapper>
 );
+
+export default SendMessage;

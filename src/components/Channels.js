@@ -53,7 +53,7 @@ const user = ({ id, name }) => (
   </SideBarListItem>
 );
 
-export default ({ teamName, username, channels, users }) => (
+const Channels = ({ teamName, username, channels, users }) => (
   <ChannelWrapper>
     <PushLeft>
       <TeamNameHeader>{teamName}</TeamNameHeader>
@@ -73,3 +73,5 @@ export default ({ teamName, username, channels, users }) => (
     </div>
   </ChannelWrapper>
 );
+
+export default Channels;
