@@ -11,13 +11,14 @@ const Sidebar = ({ data: { loading, allTeams }, currentTeamId }) => {
   if (loading) {
     return null;
   }
+  console.info(allTeams);
 
+  // failing right here!
   const teamIdx = _.findIndex(allTeams, ['id', currentTeamId]);
-  console.info(teamIdx);
+  // allTeams.findIndex(obj => obj.id === currentTeamId);
+  //console.info(teamIdx);
 
   const team = allTeams[teamIdx];
-
-  console.info(team);
 
   let username = '';
   try {
@@ -38,9 +39,9 @@ const Sidebar = ({ data: { loading, allTeams }, currentTeamId }) => {
     />,
     <Channels
       key="channels-sidebar"
-      teamName={'team.name'}
+      teamName={team.name}
       username={username}
-      channels={''}
+      channels={team.channels}
       users={[{ id: 1, name: 'slackbot' }, { id: 2, name: 'user1' }]}
     />
   ];
