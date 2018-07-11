@@ -9,8 +9,8 @@ import {
   Container,
   Header
 } from 'semantic-ui-react';
-// import gql from 'graphql-tag';
-import { graphql, gql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
 class CreateTeam extends Component {
   constructor(props) {
