@@ -4,25 +4,28 @@ import Channels from './Channels';
 import Teams from './Teams';
 import Header from './Header';
 import Messages from './Messages';
-import Input from './Input';
+import SendMessage from './SendMessage';
 import AppLayout from './AppLayout';
 
 class ViewTeam extends Component {
   render() {
     return (
       <AppLayout>
-        <Teams>Teams</Teams>
-        <Channels>Channels</Channels>
-        <Header>Header</Header>
+        <Teams teams={[{ id: 1, letter: 'S' }, { id: 2, letter: 'P' }]} />
+        <Channels
+          teamName="Team name"
+          username="Username"
+          channels={[{ id: 1, name: 'general' }, { id: 1, name: 'random' }]}
+          users={[{ id: 1, name: 'slackbot' }, { id: 2, name: 'user1' }]}
+        />
+        <Header channelName={'general'} />
         <Messages>
           <ul className="message-list">
             <li />
             <li />
           </ul>
         </Messages>
-        <Input>
-          <input type="text" placeholder="Css Grid Layout Module" />
-        </Input>
+        <SendMessage channelName="general" />
       </AppLayout>
     );
   }

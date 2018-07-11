@@ -1,6 +1,5 @@
 {
   "rules": {
-    "array-bracket-spacing": [2, "always"],
     "no-use-before-define": [2, "nofunc"],
     "no-shadow": 0,
     "prefer-const": 1,
