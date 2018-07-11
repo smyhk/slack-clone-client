@@ -13,10 +13,7 @@ const Sidebar = ({ data: { loading, allTeams }, currentTeamId }) => {
   }
   console.info(allTeams);
 
-  // failing right here!
   const teamIdx = _.findIndex(allTeams, ['id', currentTeamId]);
-  // allTeams.findIndex(obj => obj.id === currentTeamId);
-  //console.info(teamIdx);
 
   const team = allTeams[teamIdx];
 
