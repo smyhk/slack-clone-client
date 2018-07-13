@@ -1,8 +1,10 @@
 import React from 'react';
 import { Form, Input, Modal, Button } from 'semantic-ui-react';
 import { withFormik } from 'formik';
-import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
+import findIndex from 'lodash/findIndex';
+
+import { createChannelMutation, allTeamsQuery } from '../graphql/queries';
 
 const AddChannelModal = ({
   open,
@@ -45,12 +47,6 @@ const AddChannelModal = ({
   </Modal>
 );
 
-const createChannelMutation = gql`
-  mutation($teamId: Int!, $name: String!) {
-    createChannel(teamId: $teamId, name: $name)
-  }
-`;
-
 export default compose(
   graphql(createChannelMutation),
   withFormik({
@@ -61,7 +57,33 @@ export default compose(
       { props: { onClose, teamId, mutate }, setSubmitting }
     ) => {
       await mutate({
-        variables: { teamId, name: values.name }
+        variables: { teamId, name: values.name },
+        // updates the UI before the mutation is executed
+        optimisticResponse: {
+          createChannel: {
+            __typename: 'Mutation',
+            ok: true,
+            channel: {
+              __typename: 'Channel',
+              id: -1,
+              name: values.name
+            }
+          }
+        },
+        update: (store, { data: { createChannel } }) => {
+          const { ok, channel } = createChannel;
+          if (!ok) {
+            return;
+          }
+          // Read the data from our cache for this query.
+          const data = store.readQuery({ query: allTeamsQuery });
+          // find the index of the current team id
+          const teamIdx = findIndex(data.allTeams, ['id', teamId]);
+          // add the channel to the team's channels array
+          data.allTeams[teamIdx].channels.push(channel);
+          // Write our data back to the cache.
+          store.writeQuery({ query: allTeamsQuery, data });
+        }
       });
       onClose();
       setSubmitting(false);

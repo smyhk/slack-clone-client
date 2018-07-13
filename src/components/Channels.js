@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const ChannelWrapper = styled.div`
   grid-column: 2;
@@ -44,8 +45,10 @@ const Green = styled.span`
 
 const Bubble = ({ on = true }) => (on ? <Green>●</Green> : '○');
 
-const channel = ({ id, name }) => (
-  <SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
+const channel = ({ id, name }, teamId) => (
+  <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
+    <SideBarListItem># {name}</SideBarListItem>
+  </Link>
 );
 
 const user = ({ id, name }) => (
@@ -59,7 +62,8 @@ const Channels = ({
   username,
   channels,
   users,
-  onAddChannelClick
+  onAddChannelClick,
+  teamId
 }) => (
   <ChannelWrapper>
     <PushLeft>
@@ -71,7 +75,7 @@ const Channels = ({
         <SideBarListHeader>
           Channels <Icon onClick={onAddChannelClick} name="add circle" />
         </SideBarListHeader>
-        {channels.map(channel)}
+        {channels.map(c => channel(c, teamId))}
       </SideBarList>
     </div>
     <div>

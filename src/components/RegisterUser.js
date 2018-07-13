@@ -7,8 +7,8 @@ import {
   Container,
   Header
 } from 'semantic-ui-react';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { registerUserMutation } from '../graphql/queries';
 
 class RegisterUser extends Component {
   constructor(props) {
@@ -120,17 +120,5 @@ class RegisterUser extends Component {
     );
   }
 }
-
-const registerUserMutation = gql`
-  mutation($username: String!, $email: String!, $password: String!) {
-    registerUser(username: $username, email: $email, password: $password) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 export default graphql(registerUserMutation)(RegisterUser);
