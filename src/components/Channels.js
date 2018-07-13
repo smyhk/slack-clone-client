@@ -58,12 +58,14 @@ const user = ({ id, name }) => (
 );
 
 const Channels = ({
+  // props
   teamName,
   username,
   channels,
   users,
   onAddChannelClick,
-  teamId
+  teamId,
+  onInvitePeopleClick
 }) => (
   <ChannelWrapper>
     <PushLeft>
@@ -83,6 +85,11 @@ const Channels = ({
         <SideBarListHeader>Direct Messages</SideBarListHeader>
         {users.map(user)}
       </SideBarList>
+    </div>
+    <div>
+      <a href="#invite-people" onClick={onInvitePeopleClick}>
+        + Invite People
+      </a>
     </div>
   </ChannelWrapper>
 );

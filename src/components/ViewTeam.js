@@ -28,7 +28,6 @@ const ViewTeam = ({
     ? findIndex(team.channels, ['id', parseInt(channelId, 10)])
     : 0;
   const channel = team.channels[channelIdx];
-  console.info(channel.name);
 
   return (
     <AppLayout>
