@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import { graphql, compose } from 'react-apollo';
 import findIndex from 'lodash/findIndex';
 
-import { createChannelMutation, allTeamsQuery } from '../graphql/queries';
+import { createChannelMutation, getUserQuery } from '../graphql/queries';
 
 const AddChannelModal = ({
   open,
@@ -76,13 +76,13 @@ export default compose(
             return;
           }
           // Read the data from our cache for this query.
-          const data = store.readQuery({ query: allTeamsQuery });
+          const data = store.readQuery({ query: getUserQuery });
           // find the index of the current team id
-          const teamIdx = findIndex(data.allTeams, ['id', teamId]);
+          const teamIdx = findIndex(data.getUser.teams, ['id', teamId]);
           // add the channel to the team's channels array
-          data.allTeams[teamIdx].channels.push(channel);
+          data.getUser.teams[teamIdx].channels.push(channel);
           // Write our data back to the cache.
-          store.writeQuery({ query: allTeamsQuery, data });
+          store.writeQuery({ query: getUserQuery, data });
         }
       });
       onClose();

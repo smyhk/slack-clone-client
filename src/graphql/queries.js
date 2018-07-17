@@ -1,24 +1,18 @@
 import gql from 'graphql-tag'; // parses queries
 
 // queries
-const allTeamsQuery = gql`
+const getUserQuery = gql`
   {
-    allTeams {
+    getUser {
       id
-      owner
-      name
-      channels {
+      username
+      teams {
         id
         name
-      }
-    }
-    inviteTeams {
-      id
-      owner
-      name
-      channels {
-        id
-        name
+        channels {
+          id
+          name
+        }
       }
     }
   }
@@ -110,7 +104,7 @@ const createMessageMutation = gql`
 `;
 
 export {
-  allTeamsQuery,
+  getUserQuery,
   messagesQuery,
   addTeamMemberMutation,
   createChannelMutation,

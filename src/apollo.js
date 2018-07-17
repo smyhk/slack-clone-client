@@ -38,11 +38,15 @@ const httpLinkWithMiddleWare = afterwareLink.concat(
   middlewareLink.concat(httpLink)
 );
 
-// Create a WebSocket link:
+// Create a WebSocket link that requres and anthenticated user:
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:8080/subscriptions`,
   options: {
-    reconnect: true
+    reconnect: true,
+    connectionParams: {
+      token: localStorage.getItem('token'),
+      refreshToken: localStorage.getItem('refreshToken')
+    }
   }
 });
 

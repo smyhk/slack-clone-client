@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo';
 import findIndex from 'lodash/findIndex';
 import { Redirect } from 'react-router-dom';
 
-import { allTeamsQuery } from '../graphql/queries';
+import { getUserQuery } from '../graphql/queries';
 
 import Header from '../components/Header';
 import SendMessage from '../components/SendMessage';
@@ -12,7 +12,7 @@ import Sidebar from '../containers/SideBar';
 import MessageContainer from '../containers/MessageContainer';
 
 const ViewTeam = ({
-  data: { loading, allTeams, inviteTeams },
+  data: { loading, getUser, ...otherProps },
   match: {
     params: { teamId, channelId }
   }
@@ -21,7 +21,9 @@ const ViewTeam = ({
     return null;
   }
 
-  const teams = [...allTeams, ...inviteTeams];
+  console.info(otherProps);
+  console.info(getUser);
+  const { teams } = getUser;
 
   // redirect a brand new user to the create team page
   if (!teams.length) {
@@ -57,4 +59,6 @@ const ViewTeam = ({
   );
 };
 
-export default graphql(allTeamsQuery)(ViewTeam);
+export default graphql(getUserQuery, {
+  options: { fetchPolicy: 'network-only' }
+})(ViewTeam);
