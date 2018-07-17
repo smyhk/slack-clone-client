@@ -24,6 +24,19 @@ const allTeamsQuery = gql`
   }
 `;
 
+const messagesQuery = gql`
+  query($channelId: Int!) {
+    messages(channelId: $channelId) {
+      id
+      text
+      user {
+        username
+      }
+      created_at
+    }
+  }
+`;
+
 // mutations
 const createChannelMutation = gql`
   mutation($teamId: Int!, $name: String!) {
@@ -90,11 +103,19 @@ const addTeamMemberMutation = gql`
   }
 `;
 
+const createMessageMutation = gql`
+  mutation($channelId: Int!, $text: String!) {
+    createMessage(channelId: $channelId, text: $text)
+  }
+`;
+
 export {
   allTeamsQuery,
+  messagesQuery,
   addTeamMemberMutation,
   createChannelMutation,
   CreateTeamMutation,
   LoginMutation,
-  registerUserMutation
+  registerUserMutation,
+  createMessageMutation
 };
