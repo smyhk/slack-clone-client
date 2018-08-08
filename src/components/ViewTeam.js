@@ -21,9 +21,7 @@ const ViewTeam = ({
     return null;
   }
 
-  console.info(otherProps);
-  console.info(getUser);
-  const { teams } = getUser;
+  const { username, teams } = getUser;
 
   // redirect a brand new user to the create team page
   if (!teams.length) {
@@ -49,6 +47,7 @@ const ViewTeam = ({
           letter: t.name.charAt(0).toUpperCase()
         }))}
         team={team}
+        username={username}
       />
       {channel && <Header channelName={channel.name} />}
       {channel && <MessageContainer channelId={channel.id} />}
